@@ -1,5 +1,4 @@
-C_implementation/client
-C_implementation/server
-rust_implementation/target/
-rust_implementation/Cargo.lock
-rust_implementation/debug
+c_implementation/server
+c_implementation/client
+rust_implementation/client/target
+rust_implementation/server/target
