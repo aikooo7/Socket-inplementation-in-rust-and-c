@@ -1,2 +1,5 @@
 C_implementation/client
 C_implementation/server
+rust_implementation/target/
+rust_implementation/Cargo.lock
+rust_implementation/debug
