@@ -1,0 +1,64 @@
+name: C continuous integration
+
+on:
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  build_c_code_linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name : Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up GCC
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: latest
+          platform: x64
+      - name: Build the code for linux
+        run: | 
+          cd c_implementation 
+          gcc server.c client.c -Wall
+  
+  build_c_code_macos:
+    runs-on: macos-latest
+    steps:
+      - name : Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build the code for macOS.
+        run: | 
+          cd c_implementation 
+          gcc server.c client.c -Wall
+
+  build_c_code_windows:
+    runs-on: windows-latest
+    steps:
+      - name : Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build the code for windows.
+        run: | 
+          cd c_implementation 
+          gcc server.c client.c -Wall
+  
+  test_rust_code:
+    runs-on: ubuntu-latest
+    steps:
+      - name : Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      
+      - name: Run cargo test
+        working-directory: rust_implementation
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
