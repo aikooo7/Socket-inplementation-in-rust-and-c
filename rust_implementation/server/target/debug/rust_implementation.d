@@ -1,1 +1,0 @@
-/home/aiko/Projects/socket_implementation_in_c_and_rust/rust_implementation/target/debug/rust_implementation: /home/aiko/Projects/socket_implementation_in_c_and_rust/rust_implementation/src/main.rs
