@@ -1,4 +1,4 @@
 c_implementation/server
 c_implementation/client
-rust_implementation/client/target
-rust_implementation/server/target
+rust_implementation/client/target/
+rust_implementation/server/target/
