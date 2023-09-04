@@ -1,8 +1,13 @@
-# Dev branch
+# Socket implementation for rust and c
 
-Hello yall, this a unstable repository that will be used for pull requests and for unstable code.
-When the code is stable it will be at the main branch.
+Hello yall, this a socket done in rust and c for fun.
+
+Hopy you enjoy!
+
+# How to use
+
+Go to the release and pick a binary else just compile yourself.
 
 # Disclaimer
 
-**Only accept pull requests into the branch(dev).**
+**Only accept pull requests into the dev branch.**
