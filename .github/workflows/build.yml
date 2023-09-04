@@ -20,7 +20,8 @@ jobs:
       - name: Build the code for linux
         run: | 
           cd c_implementation 
-          gcc server.c client.c -Wall
+          gcc server.c -Wall
+          gcc client.c -Wall
   
   build_c_code_macos:
     runs-on: macos-latest
@@ -31,7 +32,8 @@ jobs:
       - name: Build the code for macOS.
         run: | 
           cd c_implementation 
-          gcc server.c client.c -Wall
+          gcc server.c -Wall
+          gcc client.c -Wall
 
   build_c_code_windows:
     runs-on: windows-latest
@@ -42,7 +44,8 @@ jobs:
       - name: Build the code for windows.
         run: | 
           cd c_implementation 
-          gcc server.c client.c -Wall
+          gcc server.c -Wall
+          gcc client.c -Wall
   
   test_rust_code:
     runs-on: ubuntu-latest
