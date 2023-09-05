@@ -1,8 +1,9 @@
 #ifdef _WIN32
 #include <winsock2.h> // Windows-specific headers
-#include <windows.h>
+#include <ws2tcpip.h>
 #else
 #include <netinet/in.h> // Unix-like system headers
+#include <arpa/inet.h>
 #endif
 
 #include <stdio.h>
@@ -10,16 +11,35 @@
 #include <unistd.h>
 
 int main() {
+
+    // Windows specific stuff for sockets.
+
+#ifdef _WIN32
+    // Initialize Winsock
+    WSADATA wsaData;
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+        perror("WSAStartup");
+        return -1;
+    }
+#endif
+
     // Create the socket struct
     struct sockaddr_in server_info;
     server_info.sin_family = AF_INET;
     server_info.sin_port = htons(1234);
 
+#ifdef _WIN32
+    int server_info_len = sizeof(server_info);
+#else
     socklen_t server_info_len = sizeof(server_info);
-
+#endif
     struct sockaddr client_info;
-    socklen_t client_info_len = sizeof(client_info);
 
+#ifdef _WIN32
+    int client_info_len = sizeof(client_info);
+#else
+    socklen_t client_info_len = sizeof(client_info);
+#endif
     // Create the socket itself
     int sockfd = socket(server_info.sin_family, SOCK_STREAM, 0);
     if (sockfd < 0) {
@@ -28,10 +48,17 @@ int main() {
     }
     //Define socker options
     int reuse = 1;
+#ifdef _WIN32
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuse, sizeof(reuse))) {
+        perror("Socket addr already used.");
+        return -1;
+    }
+#else
     if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &reuse, sizeof(reuse))) {
         perror("Socket addr already used.");
         return -1;
     }
+#endif
     // Create the bind
     if ( 0 > bind(sockfd, (struct sockaddr*)&server_info, server_info_len)) {
         perror("Binding");
@@ -64,6 +91,11 @@ int main() {
         send(new_socket, failed, strlen(failed), 0);
         return -1;
     }
+#ifdef _WIN32
+    // Cleanup Winsock
+    WSACleanup();
+#else
     close(new_socket);
+#endif
     return 0;
 }
