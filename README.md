@@ -10,4 +10,4 @@ Go to the release and pick a binary else just compile yourself.
 
 # Disclaimer
 
-**Only accept pull requests into the dev branch.**
+**Will only accept pull requests into the dev branch.**
