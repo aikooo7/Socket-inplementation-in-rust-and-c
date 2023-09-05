@@ -32,8 +32,8 @@ jobs:
       - name: Build the code for macOS.
         run: | 
           cd c_implementation 
-          gcc server.c -Wall
-          gcc client.c -Wall
+          gcc server.c -Wall -lws2_32
+          gcc client.c -Wall -lws2_32
 
   build_c_code_windows:
     runs-on: windows-latest
