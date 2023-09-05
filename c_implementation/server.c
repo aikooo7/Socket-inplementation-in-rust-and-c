@@ -1,5 +1,11 @@
+#ifdef _WIN32
+#include <winsock2.h> // Windows-specific headers
+#include <windows.h>
+#else
+#include <netinet/in.h> // Unix-like system headers
+#endif
+
 #include <stdio.h>
-#include <netinet/in.h>
 #include <string.h>
 #include <unistd.h>
 

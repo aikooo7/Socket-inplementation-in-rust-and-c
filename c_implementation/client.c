@@ -1,7 +1,13 @@
+#ifdef _WIN32
+#include <winsock2.h> // Windows-specific headers
+#include <windows.h>
+#else
+#include <arpa/inet.h>
+#endif
+
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <arpa/inet.h>
 
 int main(int arv, char **argc) {
     // Create socket structure
