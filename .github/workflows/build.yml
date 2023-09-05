@@ -64,4 +64,4 @@ jobs:
         working-directory: rust_implementation
         run: | 
           cd client && cargo build --release
-          cd server && cargo build --release
+          cd ../server && cargo build --release
