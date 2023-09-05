@@ -36,8 +36,8 @@ int main(int arv, char **argc) {
         return -1;
     }
 
-    ssize_t sent = send(sockfd, buffer, strlen(buffer), 0);
-    ssize_t message = recv(sockfd, buffer, sizeof(buffer), 0);
+    send(sockfd, buffer, strlen(buffer), 0);
+    recv(sockfd, buffer, sizeof(buffer), 0);
     printf("%s", buffer);
     
     // Close the socket and returns success.

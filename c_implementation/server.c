@@ -44,10 +44,8 @@ int main() {
         return -1;
     }
     char *ovo = "uabo\n";
-    int i = 0;
     char *failed = "You failed bozo L\n";
     char buffer[69];
-    ssize_t sent;
     ssize_t receaved = recv(new_socket, buffer, sizeof(buffer), 0);
     if (receaved <= 0) {
         perror("Receive");
@@ -55,9 +53,9 @@ int main() {
         buffer[receaved] = '\0'; // Null-terminate the received data as a string
     }
     if (strcmp(buffer, "ovo") == 0){
-        sent = send(new_socket, ovo, strlen(ovo), 0);
+        send(new_socket, ovo, strlen(ovo), 0);
     } else {
-        sent = send(new_socket, failed, strlen(failed), 0);
+        send(new_socket, failed, strlen(failed), 0);
         return -1;
     }
     close(new_socket);
