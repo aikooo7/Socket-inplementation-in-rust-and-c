@@ -9,7 +9,7 @@
 #include <string.h>
 #include <unistd.h>
 
-int main(int arv, char **argc) {
+int main() {
 // Windows specific stuff for sockets.
 #ifdef _WIN32
     // Initialize Winsock
