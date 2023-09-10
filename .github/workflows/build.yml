@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build the code for macOS.
-        run: | 
+        run: |
           mkdir build
           cd build
           cmake .. -G "Ninja" ..
