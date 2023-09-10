@@ -12,16 +12,15 @@ jobs:
       - name : Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up GCC
-        uses: egor-tensin/setup-gcc@v1
-        with:
-          version: latest
-          platform: x64
+      - name: Set up ninja compiler.
+        uses: seanmiddleditch/gha-setup-ninja@master
+
       - name: Build the code for linux
         run: | 
-          cd c_implementation 
-          gcc server.c -Wall
-          gcc client.c -Wall
+          mkdir build
+          cd build
+          cmake .. -G "Ninja" ..
+          ninja
   
   build_c_code_macos:
     runs-on: macos-latest
@@ -30,10 +29,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build the code for macOS.
-        run: | 
-          cd c_implementation 
-          gcc server.c -Wall
-          gcc client.c -Wall
+        run: |
+          mkdir build
+          cd build
+          cmake .. -G "Ninja" ..
+          ninja
 
   build_c_code_windows:
     runs-on: windows-latest
@@ -43,9 +43,10 @@ jobs:
 
       - name: Build the code for windows.
         run: | 
-          cd c_implementation 
-          gcc server.c -Wall -lws2_32
-          gcc client.c -Wall -lws2_32
+          mkdir build
+          cd build
+          cmake .. -G "Ninja" ..
+          ninja
   
   test_rust_code:
     runs-on: ubuntu-latest
@@ -62,6 +63,7 @@ jobs:
       
       - name: Run cargo test
         working-directory: rust_implementation
-        run: | 
-          cd client && cargo build --release
-          cd ../server && cargo build --release
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release
